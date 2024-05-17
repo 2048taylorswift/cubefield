@@ -1,108 +1,53 @@
-
-<!DOCTYPE html><html lang="en">
-<!-- Mirrored from yell0wsuit.github.io/html5-games/games/ctr2/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 18 May 2022 18:16:31 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
-<head>
+<!doctype html>
+<html>
+  <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1 user-scalable=no">
-    <link rel="icon" type="image/png" href="ctr2.png">
-    <title>Cut the Rope 2 (HTML5 edition)</title>
-    <style>
-        html,
-        body {
-            position: fixed;
-            background-color: black;
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background: url(tilebg.jpg);
-        background-repeat:   repeat;
-        }
+    <title>HTML5 Doodle Jump</title>
+    <link rel="stylesheet" href="style.css">
 
-        * {
-            -webkit-touch-callout: none;
-            /* iOS Safari */
-            -webkit-user-select: none;
-            /* Safari */
-            -khtml-user-select: none;
-            /* Konqueror HTML */
-            -moz-user-select: none;
-            /* Old versions of Firefox */
-            -ms-user-select: none;
-            /* Internet Explorer/Edge */
-            user-select: none;
-            /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
-            -ms-touch-action: none;
-            -ms-content-zooming: none;
-            touch-action: none;
-            outline: none;
-        }
+    <script src="/assets/js/prefixfree.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
 
-        #background {
-             position: absolute;
-             top: 0;
-             left: 0;
-             right: 0;
-             bottom: 0;
-         }
+      <canvas id="canvas">
+        Aww, your browser doesn't support HTML5!
+      </canvas>
 
-         #background, #loading {
-             background-color: transparent;
-             background: url(tilebg.jpg);
-             background-repeat:   repeat;
-         }
-    .ctrCursor {
-        cursor: url(cursors/cursor.cur), url(cursors/cursor.png), auto
-    }
-    @font-face {
-            font-family: Inter;
-            src: url("../../../fonts/Inter.var.woff2") format("woff2-variations");
-            font-weight: 300 900;
-            font-stretch: 35% 100%;
-            font-style: normal;
-    }
-</style>
-    <script src="gamepix.js"></script></head>
+      <div id="mainMenu">
+        <h1>doodle jump</h1>
+        <h3>using HTML5,</h3>
+        <h3>...by <a href="http://twitter.com/solitarydesigns/" target="_blank">Kushagra Agarwal</a></h3>
+  			<h3>and <a href="http://twitter.com/_rishabhp" target="_blank">Rishabh</a></h3>
 
-<body class="ctrCursor">
-    <div id="background"></div>
-    <canvas id="canvas" tabindex="0"></canvas>
-    <script>
-        function getParameterByName(name, url) {
-            name = name.replace(/[\[\]]/g, '\\$&');
-            const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
-        };
+        <p class="info">
+          use
+          <span class="key left">←</span>
+          <span class="key right">→</span>
+          to move and space to (re) start...
+        </p>
+        <a class="button" href="javascript:init()">Play</a>
+      </div>
 
-        if (getParameterByName("autorun", window.location.href) !== "0") {
-            const createScript = function() {
-                const el = document.createElement("script");
-                el.onload = function() {
-                    tinyLoader.load();
-                };
-                el.src = "tiny-loader.js";
-                return el;
-            }
+      <div id="gameOverMenu">
+        <h1>game over!</h1>
+        <h3 id="go_score">you scored 0 points</h3>
 
-            const corsScript = createScript();
-            corsScript.onerror = function() {
-                document.body.removeChild(corsScript);
-                const el = createScript();
-                el.onerror = console.error;
-                document.body.appendChild(el);
-            };
+        <a class="button" href="javascript:reset()">Restart</a>
+        <a id="tweetBtn" target="_blank" class="button tweet" href="#">Tweet score</a>
 
-            corsScript.setAttribute("crossorigin", "anonymous");
-            document.body.appendChild(corsScript);
-        }
-    </script>
+        <a id="fbBtn" target="_blank" class="button fb" href="#">Post on FB</a>
+      </div>
 
+      <!-- Preloading image ;) -->
+      <img id="sprite" src="sprites.png"/>
 
-</body>
-<!-- Mirrored from yell0wsuit.github.io/html5-games/games/ctr2/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 18 May 2022 18:16:31 GMT -->
+      <div id="scoreBoard">
+        <p id="score">0</p>
+      </div>
+
+    </div>
+
+    <script src="main.js"></script>
+  </body>
 </html>
